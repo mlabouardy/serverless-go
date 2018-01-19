@@ -4,15 +4,15 @@ jobs:
     docker:
       - image: golang:1.8
 
-    working_directory: /go/src/github.com/mlabouardy/serverless-go
+    working_directory: /go/src/github.com/mlabouardy/serverless-go/lambda
 
     steps:
       - checkout
 
       - run:
           name: Install dependencies
-          command: cd lambda && go get -v
+          command: go get -v
 
       - run:
           name: Run Unit Tests
-          command: cd lambda && go test
+          command: go test
