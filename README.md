@@ -8,7 +8,7 @@
 
 ## How to use
 
-[Serverless Golang API with AWS Lambda](http://www.blog.labouardy.com/serverless-golang-api-aws-lambda/)
+[Serverless Golang API with AWS Lambda](https://medium.com/@mlabouardy/serverless-golang-api-with-aws-lambda-34e442385a6a)
 
 ## License
 
