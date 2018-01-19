@@ -8,7 +8,7 @@
 
 ## How to use
 
-[Tutorial]()
+[Serverless Golang API with AWS Lambda](http://www.blog.labouardy.com/serverless-golang-api-aws-lambda/)
 
 ## License
 
