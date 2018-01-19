@@ -1,0 +1,37 @@
+<section class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <button *ngFor="let genre of genres" (click)="getMoviesByGenre(genre.id)" class="btn btn-secondary">{{genre.name}}</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Poster</th>
+            <th width="20%">Title</th>
+            <th>Description</th>
+            <th>Release Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <td>
+              <img src="https://image.tmdb.org/t/p/w500/{{movie.cover}}" class="cover">
+            </td>
+            <td>
+              <span class="title">{{movie.title}}</span>
+            </td>
+            <td>
+              <p class="description">{{movie.descritpion}}</p>
+            </td>
+            <td>
+              <span class="date">{{movie.releaseDate}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
