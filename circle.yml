@@ -15,8 +15,8 @@ jobs:
 
       - run:
           name: Install test dependencies
-          command: cd lambda && go test -i
-          
+          command: cd lambda && go get github.com/stretchr/testify
+
       - run:
           name: Run Unit Tests
           command: cd lambda && go test
