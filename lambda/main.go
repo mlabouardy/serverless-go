@@ -8,6 +8,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
@@ -31,14 +32,14 @@ type Movie struct {
 	ReleaseDate string `json:"release_date"`
 }
 
-func Handler(request Request) ([]Movie, error) {
+func Handler(request Request) (events.APIGatewayProxyResponse, error) {
 	url := fmt.Sprintf("https://api.themoviedb.org/3/discover/movie?api_key=%s", API_KEY)
 
 	client := &http.Client{}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return []Movie{}, ErrorBackend
+		return events.APIGatewayProxyResponse{}, ErrorBackend
 	}
 
 	if request.ID > 0 {
@@ -49,16 +50,21 @@ func Handler(request Request) ([]Movie, error) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return []Movie{}, ErrorBackend
+		return events.APIGatewayProxyResponse{}, ErrorBackend
 	}
 	defer resp.Body.Close()
 
 	var data MovieDBResponse
 	if err := json.NewDecoder(resp.Body).Decode(&data); err != nil {
-		return []Movie{}, ErrorBackend
+		return events.APIGatewayProxyResponse{}, ErrorBackend
 	}
 
-	return data.Movies, nil
+	body, _ := json.Marshal(data.Movies)
+
+	return events.APIGatewayProxyResponse{
+		Body:       string(body),
+		StatusCode: 200,
+	}, nil
 }
 
 func main() {
